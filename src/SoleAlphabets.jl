@@ -43,6 +43,7 @@ struct BoundedProposition{T} <: AbstractBoundedProposition
             return new{RightBoundedProposition}(nothing,nothing,value,operator,bound)
         else
             return new{LeftBoundedProposition}(bound,operator,value,nothing,nothing)
+        end
 
     end
 
