@@ -25,11 +25,13 @@ struct BoundedProposition{T} <: AbstractBoundedProposition
         @assert left_operator(left_bound,value) "Invalid proposition"
         @assert right_operator(value,right_bound) "Invalid proposition"
 
-        return new{DoubleBoundedProposition}(value,
+        return new{DoubleBoundedProposition}(
+        value,
         left_bound,
         right_bound,
         left_operator,
-        right_operator)
+        right_operator
+        )
 
     end
 
