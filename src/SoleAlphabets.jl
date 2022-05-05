@@ -14,8 +14,7 @@ struct DoubleBoundedProposition <: BoundedProposition
     value::Real
     right_operator::Function
     right_bound::Real
-    desc::Function
-
+    desc::Union{Function,Nothing}
 
     function DoubleBoundedProposition(left_bound,left_operator,value,right_operator,right_bound,desc)
 
@@ -40,9 +39,9 @@ struct SingleBoundedProposition <: BoundedProposition
     value::Real
     operator::Function
     bound::Real
-    desc::Function
+    desc::Union{Function,Nothing}
 
-    function SingleBoundedProposition(value,operator,bound,desc)
+    function SingleBoundedProposition(value,operator,bound,desc=nothing)
 
         @assert operator(value,bound) "Invalid proposition"
 
@@ -52,10 +51,31 @@ struct SingleBoundedProposition <: BoundedProposition
 
 end
 
+function PropositionPrint(io::IO,p::DoubleBoundedProposition)
 
-show(io::IO,p::DoubleBoundedProposition) = println(io,typeof(a)," : ",p.left_bound," ",
-                                                    p.left_operator," ", p.desc,"(A)"," ",
-                                                    p.right_operator," ", p.right_bound)
+    if p.desc === nothing
+        println(io,typeof(p)," : ",p.left_bound," ",
+        p.left_operator," ","A"," ",p.right_operator," ", p.right_bound)
+    else
+        println(io,typeof(p)," : ",p.left_bound," ",
+        p.left_operator," ",p.desc,"(A)"," ",p.right_operator," ", p.right_bound)
+    end
 
-show(io::IO,p::SingleBoundedProposition) = println(io,typeof(p)," : ", p.desc,"(A)"," ",
-                                                    p.operator, " ",p.bound)
+end
+
+function PropositionPrint(io::IO,p::SingleBoundedProposition)
+
+    if p.desc === nothing
+        println(io,typeof(p)," : ","A"," ",p.operator," ",p.bound)
+    else
+        println(io,typeof(p)," : ",p.desc,"(A)"," ",p.operator, " ",p.bound)
+    end
+
+end
+
+
+show(io::IO,p::DoubleBoundedProposition) = PropositionPrint(io,p)
+
+show(io::IO,p::SingleBoundedProposition) = PropositionPrint(io,p)
+
+end
