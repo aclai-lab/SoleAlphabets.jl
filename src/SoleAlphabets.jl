@@ -54,10 +54,10 @@ end
 function PropositionPrint(io::IO,p::DoubleBoundedProposition)
 
     if p.desc === nothing
-        println(io,typeof(p)," : ",p.left_bound," ",
+        println(io,p.left_bound," ",
         p.left_operator," ","A"," ",p.right_operator," ", p.right_bound)
     else
-        println(io,typeof(p)," : ",p.left_bound," ",
+        println(io,p.left_bound," ",
         p.left_operator," ",p.desc,"(A)"," ",p.right_operator," ", p.right_bound)
     end
 
@@ -66,9 +66,9 @@ end
 function PropositionPrint(io::IO,p::SingleBoundedProposition)
 
     if p.desc === nothing
-        println(io,typeof(p)," : ","A"," ",p.operator," ",p.bound)
+        println(io,"A"," ",p.operator," ",p.bound)
     else
-        println(io,typeof(p)," : ",p.desc,"(A)"," ",p.operator, " ",p.bound)
+        println(io,p.desc,"(A)"," ",p.operator, " ",p.bound)
     end
 
 end
