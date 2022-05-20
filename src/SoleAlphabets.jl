@@ -122,45 +122,41 @@ function _propositions_gen3(
     ))
 end
 
-function equiwidth(sample::Array{<:Real},cut::Integer)
 
-    last = eps()
-    sample = sort(unique(sample))
+function equispaced(sample::Array{<:Real},space::Real)
 
-    new_sample = []
-    new_sample = Array{Array{<:Real}}(new_sample)
-
-    w = convert(Int64,round(((maximum(sample) - minimum(sample)) / cut)))
-    bounds = [minimum(sample)+w*i for i in 0:cut];
-
-    for i in 1:cut
-        temp = [];
-
-        temp = [element for element in sample
-        if element >= bounds[i] && element <= bounds[i+1] && element != last ]
-
-        temp == [] ? continue : push!(new_sample,temp)
-        last = temp[length(temp)]
-    end
+    new_sample = LinRange(sample[1],sample[length(sample)],space)
 
     return new_sample
 
 end
+
 
 function equifreq(sample::Array{<:Real},cut::Real)
+    new_sample = Array{Real,1}()
+    n = ceil(length(sample)/(cut+1))
+    count = 0
 
-    w = convert(Int64,floor(length(sample) / cut))
-    new_sample = []
-    new_sample = Array{Array{<:Real}}(new_sample)
+    for i in 1:length(sample)
+        count+=1
 
-    for i in 0:cut
-        temp = [sample[j] for j in (i*w)+1:(i+1)*w if j <= length(sample)]
-        temp == [] ? continue : push!(new_sample,temp)
+        if count == n
+            append!(new_sample,sample[i])
+            count = 0
+        end
+
     end
 
-    return new_sample
+    if length(sample) % cut != 0
+        append!(new_sample,sample[end])
+    end
+
+    return unique(new_sample)
 
 end
+
+# Chebishev nodes can be implemented
+# 1/2(a+b)+1/2(b-a)*cos(((2k-1)*pi)/(2*n))
 
 # Return a generator to efficiently retrieve all unique propositions in sample
 function propositions(
@@ -176,7 +172,7 @@ function propositions(
     # Todo: implement something to manipulate sample
     # e.g get 30% of its values, equally distributed
     if sample_modifier !== nothing
-        sample = sample_modifier(sample,cut)[1]
+        sample = sample_modifier(sample,cut)
     end
 
     # _propositions_gen2 is used to iterate over single bounded propositions
@@ -191,7 +187,7 @@ end
 operators = [<, <=, >, >=, ==, !=]
 
 example = [36, 36, 36, 36.5, 38, 38.5, 37, 37.5, 36.75, 36.5, 36.5]
-for i in propositions(example, identity, operators, sample_modifier=equiwidth, type=SingleBoundedProposition)
+for i in propositions(example, identity, operators, sample_modifier=equifreq, cut=2 ,type=SingleBoundedProposition,)
     print(i)
 end
 
