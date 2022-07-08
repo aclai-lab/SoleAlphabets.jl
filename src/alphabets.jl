@@ -117,11 +117,8 @@ end
 
 
 function equispaced(sample::Array{<:Real},space::Real)
-
     new_sample = LinRange(sample[1],sample[length(sample)],space)
-
     return new_sample
-
 end
 
 
@@ -145,7 +142,6 @@ function equifreq(sample::Array{<:Real},cut::Real)
     end
 
     return unique(new_sample)
-
 end
 
 # Chebishev nodes can be implemented
