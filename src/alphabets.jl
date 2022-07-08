@@ -177,9 +177,9 @@ function propositions(
 end
 
 # looking to the future the user could manipulate this
-operators = [<, <=, >, >=, ==, !=]
+# operators = [<, <=, >, >=, ==, !=]
 
-example = [36, 36, 36, 36.5, 38, 38.5, 37, 37.5, 36.75, 36.5, 36.5]
-for i in propositions(example, identity, operators, sample_modifier=equifreq, cut=2 ,type=SingleBoundedProposition,)
-    print(i)
-end
+# example = [36, 36, 36, 36.5, 38, 38.5, 37, 37.5, 36.75, 36.5, 36.5]
+# for i in propositions(example, identity, operators, sample_modifier=equifreq, cut=2 ,type=SingleBoundedProposition,)
+#     print(i)
+# end

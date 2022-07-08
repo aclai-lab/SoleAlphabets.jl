@@ -9,4 +9,6 @@ export SingleBoundedProposition, DoubleBoundedProposition
 export propositions
 export equifreq, equispaced
 
+include("alphabets.jl")
+
 end
