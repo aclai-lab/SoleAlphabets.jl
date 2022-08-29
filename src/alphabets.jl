@@ -1,6 +1,9 @@
 abstract type AbstractProposition end
 abstract type BoundedProposition <: AbstractProposition end
 
+const Letter = String
+const LetterAlphabet = Vector{Letter}
+
 struct DoubleBoundedProposition <: BoundedProposition
     left_bound::Real
     left_operator::Function
