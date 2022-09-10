@@ -3,6 +3,7 @@ abstract type BoundedProposition <: AbstractProposition end
 
 const Letter = String
 const LetterAlphabet = Vector{Letter}
+SoleTraits.is_proposition(::Letter) = true
 
 struct DoubleBoundedProposition <: BoundedProposition
     left_bound::Real
