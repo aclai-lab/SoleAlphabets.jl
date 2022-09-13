@@ -8,6 +8,7 @@ IterTools = "c8e1da08-722c-5040-9ed9-7db0dc04731e"
 SoleTraits = "f0cd7361-857b-4e5b-8aae-3a26fab9cfa9"
 
 [compat]
+IterTools = "1"
 julia = "1"
 
 [extras]
