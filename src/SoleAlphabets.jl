@@ -7,6 +7,7 @@ import Base.Iterators
 
 import IterTools
 
+export AbstractProposition
 export Letter, LetterAlphabet, is_proposition
 
 export SingleBoundedProposition, DoubleBoundedProposition
