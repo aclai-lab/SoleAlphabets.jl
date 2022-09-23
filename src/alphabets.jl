@@ -1,4 +1,5 @@
 abstract type AbstractProposition <: AbstractString end
+abstract type BoundedProposition <: AbstractProposition end
 
 struct Letter <: AbstractProposition
     letter::String
