@@ -1,9 +1,7 @@
-abstract type AbstractProposition <: AbstractString end
+abstract type AbstractProposition end
 abstract type BoundedProposition <: AbstractProposition end
 
-struct Letter <: AbstractProposition
-    letter::String
-end
+const Letter = String
 const LetterAlphabet = Vector{Letter}
 SoleTraits.is_proposition(::Letter) = true
 
