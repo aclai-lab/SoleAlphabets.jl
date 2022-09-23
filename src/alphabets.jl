@@ -1,7 +1,8 @@
-abstract type AbstractProposition end
-abstract type BoundedProposition <: AbstractProposition end
+abstract type AbstractProposition <: AbstractString end
 
-const Letter = String
+struct Letter <: AbstractProposition
+    letter::String
+end
 const LetterAlphabet = Vector{Letter}
 SoleTraits.is_proposition(::Letter) = true
 
@@ -119,12 +120,10 @@ function _propositions_gen3(
     ))
 end
 
-
 function equispaced(sample::Array{<:Real},space::Real)
     new_sample = LinRange(sample[1],sample[length(sample)],space)
     return new_sample
 end
-
 
 function equifreq(sample::Array{<:Real},cut::Real)
     new_sample = Array{Real,1}()
