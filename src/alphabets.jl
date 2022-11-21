@@ -160,8 +160,6 @@ function propositions(
 )
     sample = sort(preprocessing.(unique(sample)))
 
-    # Todo: implement something to manipulate sample
-    # e.g get 30% of its values, equally distributed
     if sample_modifier !== nothing
         sample = sample_modifier(sample,cut)
     end
